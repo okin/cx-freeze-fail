@@ -3,6 +3,7 @@
 
 import base64
 import os
+import sys
 
 if os.name == 'posix':
     from duplicity import librsync
@@ -28,5 +29,6 @@ def librsyncSignature(filename, base64Encoded=True):
 
 
 if __name__ == '__main__':
-    print("Sig of self: {0}".format(librsyncSignature(__file__)))
+    for name in sys.argv[1:]:
+        print("Sig of {0}: {1}".format(name, librsyncSignature(name).strip()))
 
